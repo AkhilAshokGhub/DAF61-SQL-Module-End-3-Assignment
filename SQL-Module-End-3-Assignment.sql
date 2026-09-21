@@ -5725,4 +5725,29 @@ SELECT
 FROM customer_churn;
 
 SELECT CityTier, COUNT(*) AS ChurnedCount FROM customer_churn WHERE ChurnStatus = 'Churned' AND PreferredOrderCat = 'Laptop & Accessory' GROUP BY CityTier ORDER BY ChurnedCount DESC LIMIT 1;
+SELECT PreferredPaymentMode, COUNT(*) AS CustomerCount    FROM customer_churn WHERE ChurnStatus = 'Active' GROUP BY PreferredPaymentMode ORDER BY CustomerCount DESC LIMIT 1;
+SELECT SUM(OrderAmountHikeFromlastYear) AS TotalOrderAmountHike FROM customer_churn WHERE MaritalStatus = 'Single'    AND PreferredOrderCat = 'Mobile Phone';
+SELECT ROUND(AVG(NumberOfDeviceRegistered), 2) AS AverageDevices FROM customer_churn WHERE PreferredPaymentMode = 'UPI';
+SELECT
+    CityTier,
+    COUNT(*) AS CustomerCount
+FROM customer_churn
+GROUP BY CityTier
+ORDER BY CustomerCount DESC
+LIMIT 1;
 
+SELECT
+    Gender,
+    SUM(CouponUsed) AS TotalCoupons
+FROM customer_churn
+GROUP BY Gender
+ORDER BY TotalCoupons DESC
+LIMIT 1;
+
+
+SELECT
+    PreferredOrderCat,
+    COUNT(*) AS CustomerCount,
+    MAX(HoursSpentOnApp) AS MaxHoursSpent
+FROM customer_churn
+GROUP BY PreferredOrderCat;
